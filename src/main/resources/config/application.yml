@@ -1,0 +1,9 @@
+server:
+  logging:
+    enabled: false
+  port: 8080
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: none
