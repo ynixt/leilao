@@ -1,9 +1,9 @@
 package com.unkapps.leilao.service.auth;
 
-import com.unkapps.leilao.api.dto.user.UserLoginDto;
-import com.unkapps.leilao.api.exception.AppException;
-import com.unkapps.leilao.api.exception.dto.AppError;
-import com.unkapps.leilao.api.exception.dto.Code;
+import com.unkapps.leilao.api.v1.dto.user.UserLoginDto;
+import com.unkapps.leilao.api.v1.exception.AppException;
+import com.unkapps.leilao.api.v1.exception.dto.AppError;
+import com.unkapps.leilao.api.v1.exception.dto.Code;
 import com.unkapps.leilao.config.auth.MyUserDetails;
 import com.unkapps.leilao.domain.User;
 import com.unkapps.leilao.repository.UserRepository;

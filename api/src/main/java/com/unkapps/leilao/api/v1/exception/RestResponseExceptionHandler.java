@@ -1,7 +1,7 @@
-package com.unkapps.leilao.api.exception;
+package com.unkapps.leilao.api.v1.exception;
 
-import com.unkapps.leilao.api.exception.dto.AppError;
-import com.unkapps.leilao.api.exception.dto.FormError;
+import com.unkapps.leilao.api.v1.exception.dto.AppError;
+import com.unkapps.leilao.api.v1.exception.dto.FormError;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

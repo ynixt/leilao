@@ -1,6 +1,6 @@
 package com.unkapps.leilao.service.auction;
 
-import com.unkapps.leilao.api.dto.auction.AuctionRegisterDto;
+import com.unkapps.leilao.api.v1.dto.auction.AuctionRegisterDto;
 import com.unkapps.leilao.domain.Auction;
 import com.unkapps.leilao.repository.AuctionRepository;
 import com.unkapps.leilao.service.auth.AuthService;

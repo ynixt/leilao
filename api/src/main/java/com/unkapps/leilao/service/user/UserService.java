@@ -1,9 +1,9 @@
 package com.unkapps.leilao.service.user;
 
-import com.unkapps.leilao.api.dto.user.UserRegisterDto;
-import com.unkapps.leilao.api.exception.AppException;
-import com.unkapps.leilao.api.exception.dto.AppError;
-import com.unkapps.leilao.api.exception.dto.Code;
+import com.unkapps.leilao.api.v1.dto.user.UserRegisterDto;
+import com.unkapps.leilao.api.v1.exception.AppException;
+import com.unkapps.leilao.api.v1.exception.dto.AppError;
+import com.unkapps.leilao.api.v1.exception.dto.Code;
 import com.unkapps.leilao.domain.User;
 import com.unkapps.leilao.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

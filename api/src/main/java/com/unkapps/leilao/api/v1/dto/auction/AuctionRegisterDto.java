@@ -1,4 +1,4 @@
-package com.unkapps.leilao.api.dto.auction;
+package com.unkapps.leilao.api.v1.dto.auction;
 
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;

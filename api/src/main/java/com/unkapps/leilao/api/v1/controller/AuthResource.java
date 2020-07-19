@@ -1,7 +1,7 @@
-package com.unkapps.leilao.api.controller.v1;
+package com.unkapps.leilao.api.v1.controller;
 
-import com.unkapps.leilao.api.dto.user.UserLoginDto;
-import com.unkapps.leilao.api.dto.user.UserRegisterDto;
+import com.unkapps.leilao.api.v1.dto.user.UserLoginDto;
+import com.unkapps.leilao.api.v1.dto.user.UserRegisterDto;
 import com.unkapps.leilao.service.auth.AuthService;
 import com.unkapps.leilao.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

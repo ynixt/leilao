@@ -1,4 +1,4 @@
-package com.unkapps.leilao.api.exception.dto;
+package com.unkapps.leilao.api.v1.exception.dto;
 
 import lombok.Data;
 

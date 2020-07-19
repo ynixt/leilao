@@ -1,7 +1,7 @@
-package com.unkapps.leilao.api.controller.v1;
+package com.unkapps.leilao.api.v1.controller;
 
-import com.unkapps.leilao.api.dto.auction.AuctionCreatedDto;
-import com.unkapps.leilao.api.dto.auction.AuctionRegisterDto;
+import com.unkapps.leilao.api.v1.dto.auction.AuctionCreatedDto;
+import com.unkapps.leilao.api.v1.dto.auction.AuctionRegisterDto;
 import com.unkapps.leilao.domain.Auction;
 import com.unkapps.leilao.service.auction.AuctionRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
