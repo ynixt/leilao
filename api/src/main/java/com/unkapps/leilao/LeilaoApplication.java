@@ -9,6 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 
 import java.util.Map;
+import java.util.TimeZone;
 
 @ComponentScan
 @EnableAutoConfiguration
@@ -28,7 +29,7 @@ public class LeilaoApplication {
                         "\n\n----------------------------------------------------------",
                 env.getProperty("server.port")
         );
-
+        TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
     }
 
 }
