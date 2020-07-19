@@ -1,0 +1,14 @@
+server:
+  logging:
+    enabled: false
+  port: 8080
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: none
+  datasource:
+    database: H2
+    open-in-view: false
+  flyway:
+    enabled: false

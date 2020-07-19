@@ -3,11 +3,15 @@ package com.unkapps.leilao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 
 import java.util.Map;
 
+@ComponentScan
+@EnableAutoConfiguration
 @SpringBootApplication
 public class LeilaoApplication {
     private static final Logger log = LoggerFactory.getLogger(LeilaoApplication.class);
