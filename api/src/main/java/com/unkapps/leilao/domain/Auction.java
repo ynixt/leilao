@@ -32,6 +32,9 @@ public class Auction extends DomainOneId {
     @ManyToOne(fetch = FetchType.LAZY)
     private User userResponsible;
 
+    @Column(name = "user_responsible_id", updatable = false, insertable = false)
+    private Long userResponsibleId;
+
     @NotNull
     @Column
     private ZonedDateTime openDate;

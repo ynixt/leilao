@@ -14,6 +14,8 @@ public interface AuctionRepository extends JpaRepository<Auction, Long> {
     @Query("select auction from Auction auction" +
             " join fetch auction.userResponsible responsible" +
             " where auction.id = :id")
+    public Optional<Auction> getByIdFetchResponsible(@Param("id") Long id);
+
     public Optional<Auction> getById(@Param("id") Long id);
 
     @Query(value = "from Auction auction" +

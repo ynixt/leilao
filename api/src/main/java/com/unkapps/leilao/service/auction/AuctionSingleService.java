@@ -15,7 +15,7 @@ public class AuctionSingleService {
     private AuctionRepository auctionRepository;
 
     public Optional<AuctionSingleDto> getById(@NotNull Long id) {
-        Optional<Auction> optionalAuction = auctionRepository.getById(id);
+        Optional<Auction> optionalAuction = auctionRepository.getByIdFetchResponsible(id);
 
         if (optionalAuction.isPresent()) {
             return Optional.of(toSingleDto(optionalAuction.get()));

@@ -65,13 +65,13 @@ public class AuctionSingleServiceTest {
 
     @Test
     public void getByIdWhenFound() {
-        when(auctionRepository.getById(any(Long.class))).thenReturn(Optional.of(createAuction()));
+        when(auctionRepository.getByIdFetchResponsible(any(Long.class))).thenReturn(Optional.of(createAuction()));
         assertTrue(auctionSingleService.getById(10L).isPresent());
     }
 
     @Test
     public void getByIdWhenNotFound() {
-        when(auctionRepository.getById(any(Long.class))).thenReturn(Optional.empty());
+        when(auctionRepository.getByIdFetchResponsible(any(Long.class))).thenReturn(Optional.empty());
         assertTrue(auctionSingleService.getById(10L).isEmpty());
     }
 }

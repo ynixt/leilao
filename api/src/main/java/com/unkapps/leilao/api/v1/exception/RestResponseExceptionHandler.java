@@ -35,6 +35,6 @@ public class RestResponseExceptionHandler extends ResponseEntityExceptionHandler
     @ResponseBody
     public ResponseEntity<?> handleAnyException(AppException e)
     {
-        return new ResponseEntity<>(e.getError(), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(e.getError(), e.getHttpStatus());
     }
 }

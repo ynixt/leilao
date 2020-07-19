@@ -5,6 +5,7 @@ import com.unkapps.leilao.api.v1.dto.auction.AuctionListDto;
 import com.unkapps.leilao.api.v1.dto.auction.AuctionRegisterDto;
 import com.unkapps.leilao.api.v1.dto.auction.AuctionSingleDto;
 import com.unkapps.leilao.domain.Auction;
+import com.unkapps.leilao.service.auction.AuctionDeleteService;
 import com.unkapps.leilao.service.auction.AuctionListService;
 import com.unkapps.leilao.service.auction.AuctionRegisterService;
 import com.unkapps.leilao.service.auction.AuctionSingleService;
@@ -29,6 +30,9 @@ public class AuctionResource {
     @Autowired
     private AuctionListService auctionListService;
 
+    @Autowired
+    private AuctionDeleteService auctionDeleteService;
+
     @GetMapping("/{id}")
     public ResponseEntity<AuctionSingleDto> getById(@PathVariable Long id) {
         Optional<AuctionSingleDto> result = auctionSingleService.getById(id);
@@ -48,5 +52,11 @@ public class AuctionResource {
         Auction auction = auctionRegisterService.register(dto);
         AuctionCreatedDto createdDto = new AuctionCreatedDto(auction.getId());
         return ResponseEntity.ok(createdDto);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteById(@PathVariable Long id) {
+        auctionDeleteService.deleteById(id);
+        return ResponseEntity.ok("");
     }
 }
