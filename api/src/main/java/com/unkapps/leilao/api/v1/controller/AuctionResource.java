@@ -7,7 +7,6 @@ import com.unkapps.leilao.api.v1.dto.auction.AuctionUpdateDto;
 import com.unkapps.leilao.domain.Auction;
 import com.unkapps.leilao.service.auction.*;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.Authorization;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -48,7 +47,7 @@ public class AuctionResource {
     })
     @GetMapping(value = "/{id}", produces = "application/json")
     public ResponseEntity<AuctionSingleDto> getById(
-            @ApiParam(required = true) @PathVariable Long id
+            @Valid @NotNull @PathVariable Long id
     ) {
         Optional<AuctionSingleDto> result = auctionSingleService.getById(id);
 
@@ -94,7 +93,7 @@ public class AuctionResource {
             @ApiResponse(responseCode = "404", description = "Auction not found"),
     })
     public ResponseEntity<Void> updateById(
-            @ApiParam(required = true) @PathVariable Long id,
+            @Valid @NotNull @PathVariable Long id,
             @Valid @NotNull @RequestBody AuctionUpdateDto dto
     ) {
         auctionUpdateService.updateById(id, dto);
@@ -110,7 +109,7 @@ public class AuctionResource {
             @ApiResponse(responseCode = "404", description = "Auction not found"),
     })
     public ResponseEntity<Void> deleteById(
-            @ApiParam(required = true) @PathVariable Long id
+            @Valid @NotNull @PathVariable Long id
     ) {
         auctionDeleteService.deleteById(id);
         return ResponseEntity.noContent().build();
