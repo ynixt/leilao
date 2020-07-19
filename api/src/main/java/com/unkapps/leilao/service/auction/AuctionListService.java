@@ -8,9 +8,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Service
 public class AuctionListService {
     @Autowired
@@ -31,7 +28,7 @@ public class AuctionListService {
             listDto.setUserResponsible(new AuctionListDto.UserDto(auction.getUserResponsible().getId(),
                     auction.getUserResponsible().getLogin()));
             listDto.setUsed(auction.isUsed());
-            listDto.setFinished(auction.getEndDate() != null);
+            listDto.setFinished(auction.isFinished());
             listDto.setInitialValue(auction.getInitialValue());
 
             return listDto;

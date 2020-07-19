@@ -47,7 +47,9 @@ public class BidResource {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Bid was created"),
             @ApiResponse(responseCode = "403", description = "User not authenticated"),
-            @ApiResponse(responseCode = "400", description = "Dto doesn't respect the business role"),
+            @ApiResponse(responseCode = "400",
+                    description = "Dto doesn't respect the business role or auction not found or auction is finished."
+            ),
     })
     @PostMapping(produces = "application/json")
     public ResponseEntity<Void> register(@Valid @NotNull @RequestBody BidRegisterDto dto) {

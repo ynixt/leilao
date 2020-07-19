@@ -45,4 +45,8 @@ public class Auction extends DomainOneId {
     public String toString() {
         return "id" + ", " + name;
     }
+
+    public boolean isFinished() {
+        return this.endDate != null;
+    }
 }

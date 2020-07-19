@@ -5,4 +5,5 @@ public enum Code {
     USER_ALREADY_EXISTS,
     USER_NOT_FOUND,
     AUCTION_NOT_FOUND,
+    AUCTION_FINISHED,
 }
