@@ -1,6 +1,8 @@
 package com.unkapps.leilao.service.auction;
 
 import com.unkapps.leilao.api.v1.exception.AppException;
+import com.unkapps.leilao.api.v1.exception.dto.Code;
+import com.unkapps.leilao.api.v1.exception.dto.CodeError;
 import com.unkapps.leilao.domain.Auction;
 import com.unkapps.leilao.domain.User;
 import com.unkapps.leilao.repository.AuctionRepository;
@@ -84,6 +86,37 @@ public class AuctionServiceTest {
         when(auctionRepository.getById(eq(id))).thenReturn(Optional.of(createAuction(100L)));
 
         Auction auction = auctionService.getAuctionForModify(id);
+        assertNotNull(auction, "Auction must be not null");
+    }
+
+    @Test
+    public void getAuctionOrThrowWhenNotFound() {
+        Long id = 10L;
+
+        when(auctionRepository.getById(eq(id))).thenReturn(Optional.empty());
+
+        AppException exception = assertThrows(AppException.class, () -> {
+            auctionService.getAuctionOrThrow(id);
+        });
+
+        assertNotNull(exception.getError(), "Error must be not null");
+        assertNotNull(exception.getError().getErrors(), "Errors must be not null");
+        assertTrue(exception.getError().getErrors().size() == 1, "Errors must contain just one item");
+
+        Object error = exception.getError().getErrors().get(0);
+
+        assertTrue(error instanceof CodeError, "Error must be a CodeError");
+        assertTrue(((CodeError) error).getCode() == Code.AUCTION_NOT_FOUND, "Error must contains correct code");
+    }
+
+    @Test
+    public void getAuctionOrThrowWhenOk() {
+        Long id = 10L;
+
+        when(auctionRepository.getById(eq(id))).thenReturn(Optional.empty());
+
+        Auction auction = auctionService.getAuctionOrThrow(id);
+
         assertNotNull(auction, "Auction must be not null");
     }
 }

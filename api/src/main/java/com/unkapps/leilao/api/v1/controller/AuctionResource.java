@@ -68,7 +68,7 @@ public class AuctionResource {
 
     @ApiOperation(value = "Creates a new auction", authorizations = {@Authorization(value = "Bearer")})
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Returns the auction that was created"),
+            @ApiResponse(responseCode = "201", description = "Auction was created"),
             @ApiResponse(responseCode = "403", description = "User not authenticated"),
             @ApiResponse(responseCode = "400", description = "Dto doesn't respect the business role"),
     })
