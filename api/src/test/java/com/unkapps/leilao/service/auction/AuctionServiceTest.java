@@ -113,7 +113,7 @@ public class AuctionServiceTest {
     public void getAuctionOrThrowWhenOk() {
         Long id = 10L;
 
-        when(auctionRepository.getById(eq(id))).thenReturn(Optional.empty());
+        when(auctionRepository.getById(eq(id))).thenReturn(Optional.of(createAuction(100L)));
 
         Auction auction = auctionService.getAuctionOrThrow(id);
 
