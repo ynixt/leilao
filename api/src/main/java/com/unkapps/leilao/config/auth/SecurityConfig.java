@@ -1,4 +1,4 @@
-package com.unkapps.leilao.config;
+package com.unkapps.leilao.config.auth;
 
 import com.unkapps.leilao.filter.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
