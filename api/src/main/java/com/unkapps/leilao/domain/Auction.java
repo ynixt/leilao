@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -28,7 +29,7 @@ public class Auction extends DomainOneId {
     private boolean used;
 
     @NotNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private User userResponsible;
 
     @NotNull
@@ -37,4 +38,8 @@ public class Auction extends DomainOneId {
 
     @Column
     private ZonedDateTime endDate;
+
+    public String toString() {
+        return "id" + ", " + name;
+    }
 }
