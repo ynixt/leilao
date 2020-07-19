@@ -16,7 +16,6 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/api/v1/auth")
 public class AuthResource {
-
     @Autowired
     private AuthService authService;
 
