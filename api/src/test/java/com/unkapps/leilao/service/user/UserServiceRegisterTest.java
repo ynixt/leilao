@@ -1,4 +1,4 @@
-package com.unkapps.leilao.service;
+package com.unkapps.leilao.service.user;
 
 import com.unkapps.leilao.api.v1.dto.user.UserRegisterDto;
 import com.unkapps.leilao.api.v1.exception.AppException;
