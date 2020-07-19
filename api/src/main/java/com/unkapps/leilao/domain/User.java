@@ -8,11 +8,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class User extends DomainOneId {
     @Column
     @NotBlank
     private String login;
