@@ -4,7 +4,10 @@ import com.unkapps.leilao.api.v1.dto.LoginDto;
 import com.unkapps.leilao.api.v1.dto.user.UserLoginDto;
 import com.unkapps.leilao.api.v1.dto.user.UserRegisterDto;
 import com.unkapps.leilao.service.auth.AuthService;
+import com.unkapps.leilao.service.auth.jwt.AuthJwtService;
 import com.unkapps.leilao.service.user.UserService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.security.Principal;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -33,6 +38,18 @@ public class AuthResource {
     @PostMapping(value = "/login", produces = "application/json")
     public ResponseEntity<LoginDto> login(@Valid @RequestBody UserLoginDto user) {
         String token = authService.login(user);
+
+        return ResponseEntity.ok(new LoginDto(token));
+    }
+
+    @ApiOperation(value = "Renew a token", authorizations = {@Authorization(value = "Bearer")})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "New token"),
+            @ApiResponse(responseCode = "403", description = "Token expired or invalid"),
+    })
+    @PostMapping(value = "/renewToken", produces = "application/json")
+    public ResponseEntity<LoginDto> renewToken() {
+        String token = ((AuthJwtService)authService).renewToken();
 
         return ResponseEntity.ok(new LoginDto(token));
     }

@@ -28,4 +28,8 @@ public class AuthJwtService extends AuthService {
         final MyUserDetails userDetails = (MyUserDetails) authenticate.getPrincipal();
         return jwtService.generateToken(userDetails);
     }
+
+    public String renewToken() {
+        return jwtService.generateToken(getCurrentUserDetails());
+    }
 }

@@ -41,10 +41,13 @@ public abstract class AuthService implements UserDetailsService {
         return user.map(MyUserDetails::new).get();
     }
 
+    public MyUserDetails getCurrentUserDetails() {
+        return (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    }
+
     public User getCurrentUser() {
         try {
-            Long userId = ((MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
-                    .getUserId();
+            Long userId = getCurrentUserDetails().getUserId();
             return entityManager.getReference(User.class, userId);
         } catch (
                 EntityNotFoundException ex) {
