@@ -36,6 +36,8 @@ dependencies {
 	compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
 
 	testCompile "com.h2database:h2"
+
+	implementation "io.springfox:springfox-boot-starter:3.0.0"
 }
 
 test {

@@ -26,7 +26,7 @@ public class AuctionDeleteService {
         if (auction.isEmpty()) {
             throw new AppException(HttpStatus.NOT_FOUND);
         } else if (auction.get().getUserResponsibleId().equals(userId) == false) {
-            throw new AppException(HttpStatus.FORBIDDEN);
+            throw new AppException(HttpStatus.UNAUTHORIZED);
         }
 
         auctionRepository.deleteById(id);
