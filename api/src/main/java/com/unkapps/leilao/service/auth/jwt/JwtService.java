@@ -1,4 +1,4 @@
-package com.unkapps.leilao.service.auth;
+package com.unkapps.leilao.service.auth.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

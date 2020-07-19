@@ -9,8 +9,6 @@ import com.unkapps.leilao.domain.User;
 import com.unkapps.leilao.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -24,28 +22,17 @@ import javax.validation.constraints.NotNull;
 import java.util.Optional;
 
 @Service
-public class AuthService implements UserDetailsService {
+public abstract class AuthService implements UserDetailsService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private JwtService jwtService;
-
-
     @PersistenceContext
     private EntityManager entityManager;
 
-    public String login(@NotNull UserLoginDto user) {
-        Authentication authenticate = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(user.getLogin(), user.getPassword())
-        );
-
-        final MyUserDetails userDetails = (MyUserDetails) authenticate.getPrincipal();
-        return jwtService.generateToken(userDetails);
-    }
+    public abstract String login(@NotNull UserLoginDto user);
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
