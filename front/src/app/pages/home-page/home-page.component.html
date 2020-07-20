@@ -9,14 +9,14 @@
     <clr-dg-action-overflow>
       <ng-container *ngIf="auth$ | async as authState">
         <ng-container *ngIf="authState.authenticated">
-          <button class="action-item" [disabled]="authState.out.login !== auction.userResponsible.login" (click)="edit(auction.id)">Editar</button>
+          <button class="action-item" [disabled]="authState.out.login !== auction.userResponsible.login"
+            (click)="edit(auction.id)">Editar</button>
         </ng-container>
         <ng-container *ngIf="!authState.authenticated">
           <button class="action-item" disabled title="Autentique-se primeiro">Editar</button>
-          <button class="action-item" disabled title="Autentique-se primeiro">Dar lance</button>
         </ng-container>
       </ng-container>
-      <button class="action-item" (click)="detailIsOpen = true">Ver lances</button>
+      <a class="action-item" [routerLink]="['lance', auction.id]">Ver lances</a>
     </clr-dg-action-overflow>
 
     <clr-dg-cell>{{auction.name}}</clr-dg-cell>
