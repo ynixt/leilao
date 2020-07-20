@@ -18,8 +18,8 @@ public interface AuctionRepository extends JpaRepository<Auction, Long> {
 
     public Optional<Auction> getById(@Param("id") Long id);
 
-    @Query(value = "from Auction auction" +
+    @Query(value = "select auction from Auction auction" +
             " join fetch auction.userResponsible responsible",
-            countQuery = "from Auction auction")
+            countQuery = "select count(1) from Auction auction")
     public Page<Auction> list(Pageable pageable);
 }

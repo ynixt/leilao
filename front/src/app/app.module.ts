@@ -11,6 +11,13 @@ import { SharedModule } from './shared/shared.module';
 import { AuthInterceptor } from './interceptors/auth-interceptor';
 import { AuthService } from './shared/auth.service';
 
+import { LOCALE_ID } from '@angular/core';
+
+import { registerLocaleData } from '@angular/common';
+import localeBr from '@angular/common/locales/pt';
+
+registerLocaleData(localeBr);
+
 @NgModule({
   declarations: [
     AppComponent
@@ -32,6 +39,10 @@ import { AuthService } from './shared/auth.service';
       deps: [
         AuthService,
       ],
+    },
+    {
+      provide: LOCALE_ID,
+      useValue: 'pt'
     },
   ],
   bootstrap: [AppComponent]
