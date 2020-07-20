@@ -41,6 +41,7 @@ export class AuctionModalComponent implements OnInit, OnDestroy {
     this.internalModalIsOpen = modalIsOpen;
     if (!modalIsOpen) {
       this.store.dispatch(AuctionModalActions.closeAuctionModal());
+      this.reset();
     }
   }
 
@@ -153,6 +154,12 @@ export class AuctionModalComponent implements OnInit, OnDestroy {
     }
 
     return 'Um erro aconteceu. Tente novamente';
+  }
+
+  private reset(): void {
+    this.formGroup.reset();
+    this.startDate = undefined;
+    this.endDate = undefined;
   }
 
 }
