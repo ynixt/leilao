@@ -58,4 +58,8 @@ export class AuthService {
         }),
       );
   }
+
+  public logout(): void {
+    this.cookieService.delete(COOKIE_NAME);
+  }
 }

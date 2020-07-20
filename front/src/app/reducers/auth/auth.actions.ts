@@ -7,3 +7,4 @@ export const renewToken = createAction('[Auth] Renew');
 
 export const loginSuccess = createAction('[Auth] LoginSuccess', props<{ out: LoginOutDto }>());
 export const loginError = createAction('[Auth] LoginError', props<{ error: any }>());
+export const logoutSuccess = createAction('[Auth] LogoutSuccess');
