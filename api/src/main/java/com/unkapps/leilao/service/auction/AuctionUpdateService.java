@@ -27,8 +27,8 @@ public class AuctionUpdateService {
         auction.setInitialValue(dto.getInitialValue());
         auction.setOpenDate(dto.getOpenDate().withZoneSameInstant(ZoneId.of("UTC")));
 
-        if (auction.getEndDate() != null) {
-            if (auction.getEndDate().isBefore(dto.getOpenDate())) {
+        if (dto.getEndDate() != null) {
+            if (dto.getEndDate().isBefore(dto.getOpenDate())) {
                 throw new AppException(AppError.of(Code.END_DATE_BEFORE_START_DATE));
             }
             auction.setEndDate(dto.getEndDate().withZoneSameInstant(ZoneId.of("UTC")));

@@ -68,7 +68,6 @@ export class AuctionModalComponent implements OnInit, OnDestroy {
       Validators.required,
     ]),
     endDate: new FormControl('', [
-
     ]),
   });
 
@@ -105,6 +104,24 @@ export class AuctionModalComponent implements OnInit, OnDestroy {
         zone.run(() => {
           this.internalModalIsOpen = false;
         });
+      } else if (state.auction) {
+        zone.run(() => {
+          this.formGroup.setValue({
+            name: state.auction.name,
+            initialValue: state.auction.initialValue,
+            used: state.auction.used,
+            openDate: '',
+            endDate: '',
+          });
+
+          setTimeout(() => {
+            this.startDate = moment(state.auction.openDate).toDate();
+
+            if (state.auction.endDate != null) {
+              this.endDate = moment(state.auction.endDate).toDate();
+            }
+          }, 0);
+        });
       }
     });
   }
@@ -134,6 +151,11 @@ export class AuctionModalComponent implements OnInit, OnDestroy {
         if (this.endDate) {
           dto.endDate = moment(this.endDate).toISOString();
         }
+
+        this.store.dispatch(AuctionActions.updateAuction({
+          id: this.id,
+          dto,
+        }));
       } else {
         this.store.dispatch(AuctionActions.createAuction({
           dto,
@@ -146,6 +168,12 @@ export class AuctionModalComponent implements OnInit, OnDestroy {
     this.id = id;
     this.editing = this.id != null;
     this.internalModalIsOpen = true;
+
+    if (this.id != null) {
+      this.store.dispatch(AuctionActions.getAuction({
+        id: this.id,
+      }));
+    }
   }
 
   treatError(httpError: HttpErrorResponse): string {

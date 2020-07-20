@@ -20,6 +20,30 @@ export class AuctionEffects {
     )
   );
 
+  update$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuctionActions.updateAuction),
+      exhaustMap(auction =>
+        this.auctionService.update(auction.id, auction.dto).pipe(
+          map(_ => {debugger; return AuctionActions.saveSuccess()}),
+          catchError(error => of(AuctionActions.saveError({ error }))),
+        )
+      )
+    )
+  );
+
+  get$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuctionActions.getAuction),
+      exhaustMap(auction =>
+        this.auctionService.get(auction.id).pipe(
+          map(dto => AuctionActions.getAuctionSuccess({ dto })),
+          catchError(error => of(AuctionActions.getAuctionError({ error }))),
+        )
+      )
+    )
+  );
+
   constructor(
     private actions$: Actions,
     private auctionService: AuctionService,

@@ -1,7 +1,12 @@
 import { HttpErrorResponse } from '@angular/common/http';
 
+import { AuctionSingleDto } from '../../shared/dto/auction';
+
 export interface AuctionState {
-  loading: boolean;
+  saving?: boolean;
   error?: HttpErrorResponse;
   saved?: boolean;
+
+  loading?: boolean;
+  auction?: AuctionSingleDto;
 }
