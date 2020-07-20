@@ -18,10 +18,14 @@ export class AuctionService {
   }
 
   update(id: number, dto: AuctionSaveDto): Observable<any> {
-    return this.http.put<any>(`/api/v1/auction/${id}`, dto).pipe();
+    return this.http.put<any>(`/api/v1/auction/${id}`, dto);
   }
 
   get(id: number): Observable<AuctionSingleDto> {
     return this.http.get<AuctionSingleDto>(`/api/v1/auction/${id}`);
+  }
+
+  remove(id: number): Observable<any> {
+    return this.http.delete<any>(`/api/v1/auction/${id}`);
   }
 }

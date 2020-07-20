@@ -10,12 +10,9 @@
       <ng-container *ngIf="auth$ | async as authState">
         <ng-container *ngIf="authState.authenticated">
           <button class="action-item" [disabled]="authState.out.login !== auction.userResponsible.login" (click)="edit(auction.id)">Editar</button>
-          <button class="action-item"
-            [disabled]="authState.out.login !== auction.userResponsible.login" (click)="delete(auction.id)">Deletar</button>
         </ng-container>
         <ng-container *ngIf="!authState.authenticated">
           <button class="action-item" disabled title="Autentique-se primeiro">Editar</button>
-          <button class="action-item" disabled title="Autentique-se primeiro">Deletar</button>
           <button class="action-item" disabled title="Autentique-se primeiro">Dar lance</button>
         </ng-container>
       </ng-container>

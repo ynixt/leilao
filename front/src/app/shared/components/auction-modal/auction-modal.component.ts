@@ -73,15 +73,28 @@ export class AuctionModalComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store<{ auth: AuthState, auctionModal: AuctionModalState, auction: AuctionState }>,
-    zone: NgZone
+    private zone: NgZone
   ) {
     this.auth$ = store.pipe(select('auth'));
     this.auction$ = store.pipe(select('auction'));
     this.auctionModal$ = store.pipe(select('auctionModal'));
 
+    this.createSubscriptions();
+  }
+
+  ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void {
+    this.authSubscription.unsubscribe();
+    this.auctionModalSubscription.unsubscribe();
+    this.auctionSubscription.unsubscribe();
+  }
+
+  private createSubscriptions(): void {
     this.authSubscription = this.auth$.subscribe(state => {
 
-      zone.run(() => {
+      this.zone.run(() => {
         if (!state.authenticated) {
           this.internalModalIsOpen = false;
         }
@@ -93,7 +106,7 @@ export class AuctionModalComponent implements OnInit, OnDestroy {
 
     this.auctionModalSubscription = this.auctionModal$.subscribe(state => {
       if (state.isOpen) {
-        zone.run(() => {
+        this.zone.run(() => {
           this.open(state.id);
         });
       }
@@ -101,11 +114,11 @@ export class AuctionModalComponent implements OnInit, OnDestroy {
 
     this.auctionSubscription = this.auction$.subscribe(state => {
       if (state.saved) {
-        zone.run(() => {
+        this.zone.run(() => {
           this.internalModalIsOpen = false;
         });
       } else if (state.auction) {
-        zone.run(() => {
+        this.zone.run(() => {
           this.formGroup.setValue({
             name: state.auction.name,
             initialValue: state.auction.initialValue,
@@ -124,15 +137,6 @@ export class AuctionModalComponent implements OnInit, OnDestroy {
         });
       }
     });
-  }
-
-  ngOnInit(): void {
-  }
-
-  ngOnDestroy(): void {
-    this.authSubscription.unsubscribe();
-    this.auctionModalSubscription.unsubscribe();
-    this.auctionSubscription.unsubscribe();
   }
 
   onSubmit(event): void {
@@ -188,6 +192,12 @@ export class AuctionModalComponent implements OnInit, OnDestroy {
     this.formGroup.reset();
     this.startDate = undefined;
     this.endDate = undefined;
+  }
+
+  remove(): void {
+    this.store.dispatch(AuctionActions.removeAuction({
+      id: this.id,
+    }));
   }
 
 }

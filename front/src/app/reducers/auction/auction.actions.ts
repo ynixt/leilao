@@ -12,3 +12,7 @@ export const saveError = createAction('[Auction] Save Error', props<{ error: Htt
 export const getAuction = createAction('[Auction] Get', props<{ id: number }>());
 export const getAuctionSuccess = createAction('[Auction] Get Success', props<{ dto: AuctionSaveDto }>());
 export const getAuctionError = createAction('[Auction] Get Error', props<{ error: HttpErrorResponse }>());
+
+export const removeAuction = createAction('[Auction] Remove', props<{ id: number }>());
+export const removeSuccess = createAction('[Auction] Remove Success');
+export const removeError = createAction('[Auction] Remove Error', props<{ error: HttpErrorResponse }>());

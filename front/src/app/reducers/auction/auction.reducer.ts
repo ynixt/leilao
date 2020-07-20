@@ -47,4 +47,22 @@ export const auctionReducer: ActionReducer<AuctionState, Action> = createReducer
       error: action.error,
     };
   }),
+
+  on(AuctionActions.removeAuction, _ => {
+    return {
+      saving: true,
+    };
+  }),
+  on(AuctionActions.removeSuccess, _ => {
+    return {
+      saving: false,
+      saved: true,
+    };
+  }),
+  on(AuctionActions.removeError, (_, action) => {
+    return {
+      saving: false,
+      error: action.error,
+    };
+  }),
 );

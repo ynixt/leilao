@@ -65,8 +65,4 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
   edit(auctionId: number): void {
     this.store.dispatch(AuctionModalActions.openAuctionModal({ id: auctionId }));
   }
-
-  delete(auctionId: number): void {
-
-  }
 }

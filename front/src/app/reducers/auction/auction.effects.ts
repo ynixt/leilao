@@ -25,8 +25,20 @@ export class AuctionEffects {
       ofType(AuctionActions.updateAuction),
       exhaustMap(auction =>
         this.auctionService.update(auction.id, auction.dto).pipe(
-          map(_ => {debugger; return AuctionActions.saveSuccess()}),
+          map(_ => AuctionActions.saveSuccess()),
           catchError(error => of(AuctionActions.saveError({ error }))),
+        )
+      )
+    )
+  );
+
+  remove$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuctionActions.removeAuction),
+      exhaustMap(auction =>
+        this.auctionService.remove(auction.id).pipe(
+          map(_ => AuctionActions.removeSuccess()),
+          catchError(error => of(AuctionActions.removeError({ error }))),
         )
       )
     )

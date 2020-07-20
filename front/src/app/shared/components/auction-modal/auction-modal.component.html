@@ -42,25 +42,21 @@
               <span *ngIf="auctionState.error != null" class="clr-error">
                 <clr-control-error>{{treatError(auctionState.error)}}</clr-control-error>
               </span>
-              <span *ngIf="auctionState.saving">
-                <span class="spinner spinner-inline">
-                  Carregando...
-                </span>
-              </span>
             </div>
           </clr-control-container>
         </ng-container>
       </form>
     </div>
     <div class="modal-footer" *ngIf="!auctionState.loading">
+      <button type="button" class="btn btn-danger" (click)="remove()" *ngIf="editing" [disabled]="auctionState.saving">Deletar</button>
       <button type="button" class="btn btn-outline" (click)="modalIsOpen = false">Cancelar</button>
       <ng-container *ngIf="auction$ | async as auctionState">
-        <button type="button" class="btn btn-primary" disabled *ngIf="auctionState.saving"><span
+        <button *ngIf="auctionState.saving" type="button" class="btn btn-primary" disabled><span
             class="spinner spinner-inline">
             Carregando...
           </span></button>
-        <button type="button" class="btn btn-primary" (click)="form.ngSubmit.emit()"
-          *ngIf="!auctionState.saving">Salvar</button>
+        <button type="button" class="btn btn-primary" *ngIf="!auctionState.saving"
+          (click)="form.ngSubmit.emit()">Salvar</button>
       </ng-container>
     </div>
   </clr-modal>
