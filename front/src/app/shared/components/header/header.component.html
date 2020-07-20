@@ -7,10 +7,16 @@
   </div>
   <div class="header-actions" *ngIf="auth$ | async as auth">
     <ng-container *ngIf="!auth.loading">
-      <a href="javascript://" (click)='signIn()' class="nav-link nav-icon-text" *ngIf="!auth.authenticated">
-        <clr-icon shape="user"></clr-icon>
-        <span class="nav-text">Entrar</span>
-      </a>
+      <clr-dropdown>
+        <button class="nav-icon" clrDropdownTrigger aria-label="toggle menu do usuário">
+          <clr-icon shape="user"></clr-icon>
+          <clr-icon shape="caret down"></clr-icon>
+        </button>
+        <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+          <a href="javascript://" (click)='signIn()' clrDropdownItem>Entrar</a>
+          <a href="javascript://" (click)='register()' clrDropdownItem>Registrar</a>
+        </clr-dropdown-menu>
+      </clr-dropdown>
       <clr-dropdown *ngIf="auth.authenticated">
         <button class="nav-text" clrDropdownTrigger aria-label="open user profile">
           {{auth.out.login}}
@@ -33,3 +39,4 @@
 </header>
 
 <lei-login-modal #loginModal></lei-login-modal>
+<lei-register-modal #registerModal></lei-register-modal>

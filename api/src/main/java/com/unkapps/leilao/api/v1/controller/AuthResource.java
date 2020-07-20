@@ -29,7 +29,7 @@ public class AuthResource {
     private UserService userService;
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "User authenticated"),
+            @ApiResponse(responseCode = "200", description = "User authenticated. Returned token"),
             @ApiResponse(responseCode = "400", description = "Dto doesn't respect the business role"),
             @ApiResponse(responseCode = "403", description = "Login or password incorrect"),
     })
@@ -51,12 +51,12 @@ public class AuthResource {
     }
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "User registered"),
+            @ApiResponse(responseCode = "200", description = "User registered and authenticated. Returned token"),
             @ApiResponse(responseCode = "400", description = "Dto doesn't respect the business role"),
     })
     @PostMapping(value = "/register", produces = "application/json")
-    public ResponseEntity<Void> signUp(@Valid @RequestBody UserRegisterDto user) {
-        userService.register(user);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<LoginDto> signUp(@Valid @RequestBody UserRegisterDto user) {
+        String token = authService.register(user);
+        return ResponseEntity.ok(new LoginDto(token, user.getLogin()));
     }
 }

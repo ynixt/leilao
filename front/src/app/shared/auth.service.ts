@@ -62,4 +62,12 @@ export class AuthService {
   public logout(): void {
     this.cookieService.delete(COOKIE_NAME);
   }
+
+  public register(credentials: LoginInDto): Observable<LoginOutDto> {
+    return this.http.post<LoginOutDto>('/api/v1/auth/register/', credentials).pipe(
+      tap(out => {
+        this.cookieService.set(COOKIE_NAME, out.token);
+      })
+    );
+  }
 }

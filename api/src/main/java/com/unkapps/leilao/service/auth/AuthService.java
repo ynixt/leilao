@@ -1,6 +1,7 @@
 package com.unkapps.leilao.service.auth;
 
 import com.unkapps.leilao.api.v1.dto.user.UserLoginDto;
+import com.unkapps.leilao.api.v1.dto.user.UserRegisterDto;
 import com.unkapps.leilao.api.v1.exception.AppException;
 import com.unkapps.leilao.api.v1.exception.dto.AppError;
 import com.unkapps.leilao.api.v1.exception.dto.Code;
@@ -33,6 +34,7 @@ public abstract class AuthService implements UserDetailsService {
     private EntityManager entityManager;
 
     public abstract String login(@NotNull UserLoginDto user);
+    public abstract String register(@NotNull UserRegisterDto user);
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {

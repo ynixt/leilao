@@ -9,11 +9,11 @@ import { LoginInDto } from '../../dto/auth';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
-  selector: 'lei-login-modal',
-  templateUrl: './login-modal.component.html',
-  styleUrls: ['./login-modal.component.scss']
+  selector: 'lei-register-modal',
+  templateUrl: './register-modal.component.html',
+  styleUrls: ['./register-modal.component.scss']
 })
-export class LoginModalComponent implements OnInit, OnDestroy {
+export class RegisterModalComponent implements OnInit, OnDestroy {
   auth$: Observable<AuthState>;
   modalIsOpen = false;
 
@@ -56,8 +56,8 @@ export class LoginModalComponent implements OnInit, OnDestroy {
     this.modalIsOpen = true;
   }
 
-  signIn(credentials: LoginInDto): void {
-    this.store.dispatch(AuthActions.login({ credentials }));
+  register(credentials: LoginInDto): void {
+    this.store.dispatch(AuthActions.register({ credentials }));
   }
 
   onSubmit(event): void {
@@ -65,7 +65,7 @@ export class LoginModalComponent implements OnInit, OnDestroy {
       event.preventDefault();
     }
     if (this.loginFormGroup.valid) {
-      this.signIn({
+      this.register({
         login: this.loginFormGroup.get('login').value,
         password: this.loginFormGroup.get('password').value,
       });
@@ -73,9 +73,12 @@ export class LoginModalComponent implements OnInit, OnDestroy {
   }
 
   treatError(httpError: HttpErrorResponse): string {
-    if (httpError.status === 403) {
-      return 'Credenciais incorretas';
-    } else if (httpError.status >= 400 && httpError.status <= 500) {
+    if (httpError.status >= 400 && httpError.status <= 500) {
+      if (httpError.status === 400 && httpError.error && httpError.error.errors.length === 1
+        && httpError.error.errors[0].code === 'USER_ALREADY_EXISTS') {
+        return 'Login não disponível';
+      }
+
       return 'Dados preenchidos incorretamente';
     }
 

@@ -41,6 +41,18 @@ export class AuthEffects {
       })
     ));
 
+  register$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.register),
+      exhaustMap(action =>
+        this.authService.register(action.credentials).pipe(
+          map(out => AuthActions.loginSuccess({ out })),
+          catchError(error => of(AuthActions.loginError({ error }))),
+        )
+      )
+    )
+  );
+
   constructor(
     private actions$: Actions,
     private authService: AuthService
