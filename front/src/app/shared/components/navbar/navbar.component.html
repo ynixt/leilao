@@ -1,10 +1,11 @@
 <nav class="subnav">
-  <ul class="nav">
+  <ul class="nav" *ngIf="auctionModal$ | async as auctionModalState">
     <li class="nav-item">
-      <a class="nav-link active" href="#">Leilões</a>
+      <a class="nav-link" [class.active]="!auctionModalState.isOpen" href="#">Leilões</a>
     </li>
     <li class="nav-item" *ngIf="auth$ | async as authState">
-      <a class="nav-link" href="#" *ngIf="authState.authenticated">Novo leilão</a>
+      <a class="nav-link" href="javascript://" (click)="newAuction()" *ngIf="authState.authenticated"
+        [class.active]="auctionModalState.isOpen">Novo leilão</a>
       <span class="nav-link" *ngIf="!authState.authenticated" title="Autentique-se primeiro">Novo leilão</span>
     </li>
   </ul>

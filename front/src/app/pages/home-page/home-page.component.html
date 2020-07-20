@@ -9,10 +9,9 @@
     <clr-dg-action-overflow>
       <ng-container *ngIf="auth$ | async as authState">
         <ng-container *ngIf="authState.authenticated">
-          <button class="action-item" [disabled]="authState.out.login !== auction.userResponsible.login"
-            title="Apenas o responsável pode editar">Editar</button>
-          <button class="action-item" [disabled]="authState.out.login !== auction.userResponsible.login"
-            title="Apenas o responsável pode deletar">Deletar</button>
+          <button class="action-item" [disabled]="authState.out.login !== auction.userResponsible.login" (click)="edit(auction.id)">Editar</button>
+          <button class="action-item"
+            [disabled]="authState.out.login !== auction.userResponsible.login" (click)="delete(auction.id)">Deletar</button>
         </ng-container>
         <ng-container *ngIf="!authState.authenticated">
           <button class="action-item" disabled title="Autentique-se primeiro">Editar</button>
@@ -20,19 +19,20 @@
           <button class="action-item" disabled title="Autentique-se primeiro">Dar lance</button>
         </ng-container>
       </ng-container>
-      <button class="action-item">Ver lances</button>
+      <button class="action-item" (click)="detailIsOpen = true">Ver lances</button>
     </clr-dg-action-overflow>
 
     <clr-dg-cell>{{auction.name}}</clr-dg-cell>
     <clr-dg-cell>{{auction.initialValue | currency:"BRL"}}</clr-dg-cell>
     <clr-dg-cell>{{auction.used ? 'sim' : 'não'}}</clr-dg-cell>
     <clr-dg-cell>{{auction.userResponsible.login}}</clr-dg-cell>
-    <clr-dg-cell>{{auction.finished ? 'sim' : 'não'}}</clr-dg-cell>
   </clr-dg-row>
 
   <clr-dg-footer>
     {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
     de {{total}} leilões
-    <clr-dg-pagination #pagination [clrDgTotalItems]="total" [clrDgPageSize]="2"></clr-dg-pagination>
+    <clr-dg-pagination #pagination [clrDgTotalItems]="total" [clrDgPageSize]="10"></clr-dg-pagination>
   </clr-dg-footer>
 </clr-datagrid>
+
+<lei-auction-modal></lei-auction-modal>

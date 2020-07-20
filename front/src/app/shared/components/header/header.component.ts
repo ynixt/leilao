@@ -37,5 +37,4 @@ export class HeaderComponent implements OnInit {
   register(): void {
     this.registerModal.openModal();
   }
-
 }

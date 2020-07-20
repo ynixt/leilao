@@ -1,20 +1,25 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { ClrDatagridStateInterface } from '@clr/angular';
 import { ChangeDetectorRef } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
+import { Store, select } from '@ngrx/store';
 
 import { HomePageService } from './home-page.service';
 import { AuctionListDto } from 'src/app/shared/dto/auction/auction-list.dto';
 import { GridService } from '../../shared/components/grid/grid.service';
 import { AuthState } from 'src/app/reducers/auth/auth.state';
-import { Observable } from 'rxjs';
-import { Store, select } from '@ngrx/store';
+import * as AuctionModalActions from 'src/app/reducers/auction-modal/auction-modal.actions';
+import { AuctionState } from '../../reducers/auction/auction.state';
 
 @Component({
   selector: 'lei-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss']
 })
-export class HomePageComponent implements OnInit, AfterViewInit {
+export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
+  private auctionSubscription: Subscription;
+  private oldGridState: ClrDatagridStateInterface;
+
   auth$: Observable<AuthState>;
 
   auctions: AuctionListDto[] = [];
@@ -25,9 +30,15 @@ export class HomePageComponent implements OnInit, AfterViewInit {
     private homePageService: HomePageService,
     private cdRef: ChangeDetectorRef,
     private gridService: GridService,
-    store: Store<{ auth: AuthState }>
+    private store: Store<{ auth: AuthState, auction: AuctionState }>
   ) {
     this.auth$ = store.pipe(select('auth'));
+    const auction$: Observable<AuctionState> = store.pipe(select('auction'));
+    this.auctionSubscription = auction$.subscribe(state => {
+      if (state.saved) {
+        this.refresh(this.oldGridState);
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -37,12 +48,25 @@ export class HomePageComponent implements OnInit, AfterViewInit {
     this.cdRef.detectChanges();
   }
 
-  async refresh(state: ClrDatagridStateInterface): Promise<void> {
-    const result = await this.gridService.refresh<AuctionListDto>(state, this.homePageService.getAuctions.bind(this.homePageService));
+  ngOnDestroy(): void {
+    this.auctionSubscription.unsubscribe();
+  }
+
+  async refresh(gridState: ClrDatagridStateInterface): Promise<void> {
+    const result = await this.gridService.refresh<AuctionListDto>(gridState, this.homePageService.getAuctions.bind(this.homePageService));
 
     this.total = result.totalElements;
     this.auctions = result.content;
     this.loading = false;
     this.cdRef.detectChanges();
+    this.oldGridState = gridState;
+  }
+
+  edit(auctionId: number): void {
+    this.store.dispatch(AuctionModalActions.openAuctionModal({ id: auctionId }));
+  }
+
+  delete(auctionId: number): void {
+
   }
 }

@@ -8,6 +8,7 @@ import { LoginModalComponent } from './components/login-modal/login-modal.compon
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterModalComponent } from './components/register-modal/register-modal.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { AuctionModalComponent } from './components/auction-modal/auction-modal.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     LoginModalComponent,
     RegisterModalComponent,
     NavbarComponent,
+    AuctionModalComponent,
   ],
   imports: [
     CommonModule,
@@ -26,6 +28,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     NavbarComponent,
     ClarityModule,
     ReactiveFormsModule,
+    AuctionModalComponent,
   ],
   providers: [
     CookieService,

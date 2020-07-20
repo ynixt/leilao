@@ -1,0 +1,60 @@
+<clr-modal [(clrModalOpen)]="modalIsOpen" [clrModalStaticBackdrop]="false">
+  <h3 class="modal-title">{{editing ? 'Editar' : 'Novo' }} leilão</h3>
+  <div class="modal-body">
+    <form clrForm [formGroup]="formGroup" #form="ngForm" (ngSubmit)="onSubmit($event)">
+      <clr-input-container>
+        <label>Nome</label>
+        <input clrInput type="text" formControlName="name" required />
+        <clr-control-error>Deve possuir entre 2 e 50 caracteres</clr-control-error>
+      </clr-input-container>
+      <clr-input-container>
+        <label>Valor inicial</label>
+        <input clrInput type="number" formControlName="initialValue" required />
+        <clr-control-error>Deve possuir no máximo 10 digitos e 2 casas decimais</clr-control-error>
+      </clr-input-container>
+
+      <clr-date-container>
+        <label>Data de abertura</label>
+        <input type="date" [(clrDate)]="startDate" formControlName="openDate" required>
+      </clr-date-container>
+
+      <clr-date-container *ngIf="editing">
+        <label>Data de finalização</label>
+        <input type="date" [(clrDate)]="endDate" formControlName="endDate"
+          [min]="moment(startDate).format('yyyy-MM-DD')" [disabled]="startDate == null">
+      </clr-date-container>
+
+      <clr-checkbox-container>
+        <clr-checkbox-wrapper>
+          <input type="checkbox" clrCheckbox value="true" formControlName="used" />
+          <label>Usado</label>
+        </clr-checkbox-wrapper>
+      </clr-checkbox-container>
+
+      <clr-control-container>
+        <div *ngIf="auction$ | async as auctionState" class='info'>
+          <span *ngIf="auctionState.error != null" class="clr-error">
+            <clr-control-error>{{treatError(auctionState.error)}}</clr-control-error>
+          </span>
+          <span *ngIf="auctionState.loading">
+            <span class="spinner spinner-inline">
+              Carregando...
+            </span>
+          </span>
+        </div>
+      </clr-control-container>
+
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="modalIsOpen = false">Cancelar</button>
+    <ng-container *ngIf="auction$ | async as auctionState">
+      <button type="button" class="btn btn-primary" disabled *ngIf="auctionState.loading"> <span
+          class="spinner spinner-inline">
+          Carregando...
+        </span></button>
+      <button type="button" class="btn btn-primary" (click)="form.ngSubmit.emit()"
+        *ngIf="!auctionState.loading">Salvar</button>
+    </ng-container>
+  </div>
+</clr-modal>

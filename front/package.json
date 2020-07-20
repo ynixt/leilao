@@ -25,6 +25,7 @@
     "@ngrx/effects": "^9.2.0",
     "@ngrx/store": "^9.2.0",
     "@webcomponents/webcomponentsjs": "^2.0.0",
+    "moment": "^2.27.0",
     "ngx-cookie-service": "^3.0.4",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
