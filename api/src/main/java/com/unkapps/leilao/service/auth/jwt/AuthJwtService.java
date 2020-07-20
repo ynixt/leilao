@@ -1,5 +1,6 @@
 package com.unkapps.leilao.service.auth.jwt;
 
+import com.unkapps.leilao.api.v1.dto.LoginDto;
 import com.unkapps.leilao.api.v1.dto.user.UserLoginDto;
 import com.unkapps.leilao.config.auth.MyUserDetails;
 import com.unkapps.leilao.service.auth.AuthService;
@@ -29,7 +30,8 @@ public class AuthJwtService extends AuthService {
         return jwtService.generateToken(userDetails);
     }
 
-    public String renewToken() {
-        return jwtService.generateToken(getCurrentUserDetails());
+    public LoginDto renewToken() {
+        MyUserDetails currentuserDetails = getCurrentUserDetails();
+        return new LoginDto(jwtService.generateToken(currentuserDetails), currentuserDetails.getUsername());
     }
 }

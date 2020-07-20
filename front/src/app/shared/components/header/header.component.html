@@ -1,0 +1,32 @@
+<header class="header-4">
+  <div class="branding">
+    <a href="javascript://">
+      <clr-icon shape="piggy-bank" class="is-inverse"></clr-icon>
+      <span class="title">Leilão</span>
+    </a>
+  </div>
+  <div class="header-actions" *ngIf="auth$ | async as auth">
+    <ng-container *ngIf="!auth.loading">
+      <a href="javascript://" (click)='signIn()' class="nav-link nav-icon-text" *ngIf="!auth.authenticated">
+        <clr-icon shape="user"></clr-icon>
+        <span class="nav-text">{{auth.err ? 'Erro ao conectar' : 'Entrar'}}</span>
+      </a>
+      <clr-dropdown *ngIf="auth.authenticated">
+        <button class="nav-text" clrDropdownTrigger aria-label="open user profile">
+          {{auth.out.login}}
+          <clr-icon shape="caret down"></clr-icon>
+        </button>
+        <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+          <a (click)="signOut()" clrDropdownItem>Sair</a>
+        </clr-dropdown-menu>
+      </clr-dropdown>
+    </ng-container>
+    <ng-container *ngIf="auth.loading">
+      <span class="nav-link nav-icon-text">
+        <span class="spinner spinner-inline spinner-inverse">
+          Carregando...
+        </span>
+      </span>
+    </ng-container>
+  </div>
+</header>

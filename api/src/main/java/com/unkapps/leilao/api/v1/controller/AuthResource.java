@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.security.Principal;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -39,7 +37,7 @@ public class AuthResource {
     public ResponseEntity<LoginDto> login(@Valid @RequestBody UserLoginDto user) {
         String token = authService.login(user);
 
-        return ResponseEntity.ok(new LoginDto(token));
+        return ResponseEntity.ok(new LoginDto(token, user.getLogin()));
     }
 
     @ApiOperation(value = "Renew a token", authorizations = {@Authorization(value = "Bearer")})
@@ -49,9 +47,7 @@ public class AuthResource {
     })
     @PostMapping(value = "/renewToken", produces = "application/json")
     public ResponseEntity<LoginDto> renewToken() {
-        String token = ((AuthJwtService)authService).renewToken();
-
-        return ResponseEntity.ok(new LoginDto(token));
+        return ResponseEntity.ok(((AuthJwtService) authService).renewToken());
     }
 
     @ApiResponses(value = {
