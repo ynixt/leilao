@@ -1,0 +1,11 @@
+<nav class="subnav">
+  <ul class="nav">
+    <li class="nav-item">
+      <a class="nav-link active" href="#">Leilões</a>
+    </li>
+    <li class="nav-item" *ngIf="auth$ | async as authState">
+      <a class="nav-link" href="#" *ngIf="authState.authenticated">Novo leilão</a>
+      <span class="nav-link" *ngIf="!authState.authenticated" title="Autentique-se primeiro">Novo leilão</span>
+    </li>
+  </ul>
+</nav>
