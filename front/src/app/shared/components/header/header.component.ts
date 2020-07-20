@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 
 import { AuthState } from 'src/app/reducers/auth/auth.state';
 
 import * as AuthActions from '../../../reducers/auth/auth.actions';
-
+import { LoginModalComponent } from '../login-modal/login-modal.component';
 
 @Component({
   selector: 'lei-header',
@@ -15,6 +15,8 @@ import * as AuthActions from '../../../reducers/auth/auth.actions';
 export class HeaderComponent implements OnInit {
   auth$: Observable<AuthState>;
 
+  @ViewChild(LoginModalComponent) loginModal: LoginModalComponent;
+
   constructor(private store: Store<{ auth: AuthState }>) {
     this.auth$ = store.pipe(select('auth'));
   }
@@ -23,12 +25,7 @@ export class HeaderComponent implements OnInit {
   }
 
   signIn(): void {
-    const credentials = {
-      login: 'teste',
-      password: '123456',
-    };
-
-    this.store.dispatch(AuthActions.login({ credentials }));
+    this.loginModal.openModal();
   }
 
   signOut(): void {

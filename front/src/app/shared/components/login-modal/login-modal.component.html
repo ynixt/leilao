@@ -1,0 +1,35 @@
+<clr-modal [(clrModalOpen)]="modalIsOpen" [clrModalStaticBackdrop]="false">
+  <h3 class="modal-title">Entrar</h3>
+  <div class="modal-body">
+    <form clrForm [formGroup]="loginFormGroup" #form="ngForm" (ngSubmit)="onSubmit($event)">
+      <clr-input-container>
+        <label>Login</label>
+        <input clrInput type="text" formControlName="login" required />
+        <clr-control-error>Deve possuir entre 3 e 15 caracteres</clr-control-error>
+      </clr-input-container>
+      <clr-input-container>
+        <label>Senha</label>
+        <input clrInput type="password" formControlName="password" required />
+        <clr-control-error>Deve possuir entre 3 e 15 caracteres</clr-control-error>
+      </clr-input-container>
+
+      <clr-control-container>
+        <div *ngIf="auth$ | async as authState" class='info'>
+          <span *ngIf="authState.err != null" class="clr-error">
+            <clr-control-error>{{treatError(authState.err)}}</clr-control-error>
+          </span>
+          <span *ngIf="authState.loading">
+            <span class="spinner spinner-inline">
+              Carregando...
+            </span>
+          </span>
+        </div>
+      </clr-control-container>
+
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="modalIsOpen = false">Cancelar</button>
+    <button type="button" class="btn btn-primary" (click)="form.ngSubmit.emit()">Entrar</button>
+  </div>
+</clr-modal>

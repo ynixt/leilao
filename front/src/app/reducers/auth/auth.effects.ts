@@ -23,7 +23,7 @@ export class AuthEffects {
   renewToken$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.renewToken),
-      exhaustMap(action =>
+      exhaustMap(_ =>
         this.authService.renewToken().pipe(
           map(out => AuthActions.loginSuccess({ out })),
           catchError(_ => of(AuthActions.logout())),

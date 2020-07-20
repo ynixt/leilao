@@ -9,7 +9,7 @@
     <ng-container *ngIf="!auth.loading">
       <a href="javascript://" (click)='signIn()' class="nav-link nav-icon-text" *ngIf="!auth.authenticated">
         <clr-icon shape="user"></clr-icon>
-        <span class="nav-text">{{auth.err ? 'Erro ao conectar' : 'Entrar'}}</span>
+        <span class="nav-text">Entrar</span>
       </a>
       <clr-dropdown *ngIf="auth.authenticated">
         <button class="nav-text" clrDropdownTrigger aria-label="open user profile">
@@ -21,6 +21,7 @@
         </clr-dropdown-menu>
       </clr-dropdown>
     </ng-container>
+
     <ng-container *ngIf="auth.loading">
       <span class="nav-link nav-icon-text">
         <span class="spinner spinner-inline spinner-inverse">
@@ -30,3 +31,5 @@
     </ng-container>
   </div>
 </header>
+
+<lei-login-modal #loginModal></lei-login-modal>
