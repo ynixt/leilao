@@ -6,4 +6,5 @@ public enum Code {
     USER_NOT_FOUND,
     AUCTION_NOT_FOUND,
     AUCTION_FINISHED,
+    END_DATE_BEFORE_START_DATE,
 }
