@@ -7,7 +7,7 @@
   </div>
   <div class="header-actions" *ngIf="auth$ | async as auth">
     <ng-container *ngIf="!auth.loading">
-      <clr-dropdown>
+      <clr-dropdown *ngIf="!auth.authenticated">
         <button class="nav-icon" clrDropdownTrigger aria-label="toggle menu do usuário">
           <clr-icon shape="user"></clr-icon>
           <clr-icon shape="caret down"></clr-icon>
