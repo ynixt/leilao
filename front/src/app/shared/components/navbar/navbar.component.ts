@@ -5,6 +5,7 @@ import { Store, select } from '@ngrx/store';
 import { AuthState } from 'src/app/reducers/auth/auth.state';
 import * as AuctionModalActions from 'src/app/reducers/auction-modal/auction-modal.actions';
 import { AuctionModalState } from 'src/app/reducers/auction-modal/auction-modal.state';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'lei-navbar',
@@ -17,6 +18,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private store: Store<{ auth: AuthState, auctionModal: AuctionModalState }>,
+    public router: Router,
   ) {
     this.auth$ = store.pipe(select('auth'));
     this.auctionModal$ = store.pipe(select('auctionModal'));

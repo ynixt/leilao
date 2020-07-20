@@ -11,4 +11,8 @@ public class AppError {
     public static AppError of(Code code) {
         return new AppError(List.of(new CodeError(code)));
     }
+
+    public static AppError of(Code code, String extra) {
+        return new AppError(List.of(new CodeError(code, extra)));
+    }
 }

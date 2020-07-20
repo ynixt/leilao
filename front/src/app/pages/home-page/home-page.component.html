@@ -21,8 +21,9 @@
 
     <clr-dg-cell>{{auction.name}}</clr-dg-cell>
     <clr-dg-cell>{{auction.initialValue | currency:"BRL"}}</clr-dg-cell>
-    <clr-dg-cell>{{auction.used ? 'sim' : 'não'}}</clr-dg-cell>
+    <clr-dg-cell>{{auction.used ? 'X' : ''}}</clr-dg-cell>
     <clr-dg-cell>{{auction.userResponsible.login}}</clr-dg-cell>
+    <clr-dg-cell>{{auction.finished? 'X' : ''}}</clr-dg-cell>
   </clr-dg-row>
 
   <clr-dg-footer>

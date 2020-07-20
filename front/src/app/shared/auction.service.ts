@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { AuctionSaveDto, AuctionSingleDto } from './dto/auction';
+import { AuctionSaveDto, AuctionSingleDto, AuctionListDto } from './dto/auction';
 import { Observable } from 'rxjs';
+import { PageableDto } from './dto/pageable.dto';
+import { PageDto } from './dto/page.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -27,5 +29,11 @@ export class AuctionService {
 
   remove(id: number): Observable<any> {
     return this.http.delete<any>(`/api/v1/auction/${id}`);
+  }
+
+  getAuctions(pageable: PageableDto): Observable<PageDto<AuctionListDto>> {
+    return this.http.get<PageDto<AuctionListDto>>('/api/v1/auction/', {
+      params: pageable as any,
+    });
   }
 }

@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterModalComponent } from './components/register-modal/register-modal.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AuctionModalComponent } from './components/auction-modal/auction-modal.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { AuctionModalComponent } from './components/auction-modal/auction-modal.
     CommonModule,
     ClarityModule,
     ReactiveFormsModule,
+    RouterModule,
   ],
   exports: [
     HeaderComponent,

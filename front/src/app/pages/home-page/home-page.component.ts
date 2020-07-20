@@ -4,12 +4,12 @@ import { ChangeDetectorRef } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 
-import { HomePageService } from './home-page.service';
 import { AuctionListDto } from 'src/app/shared/dto/auction/auction-list.dto';
 import { GridService } from '../../shared/components/grid/grid.service';
 import { AuthState } from 'src/app/reducers/auth/auth.state';
 import * as AuctionModalActions from 'src/app/reducers/auction-modal/auction-modal.actions';
 import { AuctionState } from '../../reducers/auction/auction.state';
+import { AuctionService } from 'src/app/shared/auction.service';
 
 @Component({
   selector: 'lei-home-page',
@@ -27,7 +27,7 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
   loading = true;
 
   constructor(
-    private homePageService: HomePageService,
+    private auctionService: AuctionService,
     private cdRef: ChangeDetectorRef,
     private gridService: GridService,
     private store: Store<{ auth: AuthState, auction: AuctionState }>
@@ -53,7 +53,7 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   async refresh(gridState: ClrDatagridStateInterface): Promise<void> {
-    const result = await this.gridService.refresh<AuctionListDto>(gridState, this.homePageService.getAuctions.bind(this.homePageService));
+    const result = await this.gridService.refresh<AuctionListDto>(gridState, this.auctionService.getAuctions.bind(this.auctionService));
 
     this.total = result.totalElements;
     this.auctions = result.content;

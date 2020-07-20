@@ -1,0 +1,54 @@
+<ng-container *ngIf="auth$ | async as authState">
+  <ng-container *ngIf="authState.authenticated">
+    <form clrForm *ngIf="bid$ | async as bidState" [formGroup]="formGroup" (ngSubmit)="onSubmit($event)">
+      <clr-input-container>
+        <label>Valor do lance</label>
+        <input clrInput type="number" formControlName="value" required />
+        <clr-control-error>Deve possuir no máximo 10 digitos e 2 casas decimais</clr-control-error>
+      </clr-input-container>
+
+      <clr-control-container>
+        <button class="btn btn-primary" type="submit" *ngIf="!bidState.saving">Dar lance</button>
+        <button class="btn btn-primary" type="submit" *ngIf="bidState.saving" disabled><span
+            class="spinner spinner-inline">
+            Carregando...
+          </span>
+        </button>
+      </clr-control-container>
+
+      <clr-control-container>
+        <div class='info'>
+          <span *ngIf="bidState.error != null" class="clr-error">
+            <clr-control-error>{{treatError(bidState.error)}}</clr-control-error>
+          </span>
+        </div>
+      </clr-control-container>
+    </form>
+  </ng-container>
+  <ng-container *ngIf="!authState.authenticated">
+    Autentique-se para poder dar um lance.
+  </ng-container>
+</ng-container>
+
+
+
+
+<clr-datagrid (clrDgRefresh)="refresh($event)" [clrDgLoading]="loading">
+  <clr-dg-column [clrDgField]="'value'" [clrDgSortOrder]="descSort">Valor</clr-dg-column>
+  <clr-dg-column [clrDgField]="'date'">Data</clr-dg-column>
+  <clr-dg-column [clrDgField]="'madeByUser'">Usuário</clr-dg-column>
+
+  <clr-dg-row *ngFor="let bid of bids">
+    <clr-dg-cell>{{bid.value | currency:"BRL"}}</clr-dg-cell>
+    <clr-dg-cell clrSortOrder>{{bid.date | date:'short'}}</clr-dg-cell>
+    <clr-dg-cell>{{bid.madeByUser.login}}</clr-dg-cell>
+  </clr-dg-row>
+
+  <clr-dg-footer>
+    {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+    de {{total}} lances
+    <clr-dg-pagination #pagination [clrDgTotalItems]="total" [clrDgPageSize]="10"></clr-dg-pagination>
+  </clr-dg-footer>
+</clr-datagrid>
+
+<lei-auction-modal></lei-auction-modal>

@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { authReducer, AuthEffects, auctionModalReducer, auctionReducer, AuctionEffects } from './reducers';
+import { authReducer, AuthEffects, auctionModalReducer, auctionReducer, AuctionEffects, bidReducer, BidEffects } from './reducers';
 
 @NgModule({
   imports: [
@@ -11,6 +11,7 @@ import { authReducer, AuthEffects, auctionModalReducer, auctionReducer, AuctionE
       auth: authReducer,
       auctionModal: auctionModalReducer,
       auction: auctionReducer,
+      bid: bidReducer,
     }, {
       runtimeChecks: {
         strictStateImmutability: true,
@@ -20,6 +21,7 @@ import { authReducer, AuthEffects, auctionModalReducer, auctionReducer, AuctionE
     EffectsModule.forRoot([
       AuthEffects,
       AuctionEffects,
+      BidEffects,
     ]),
   ],
 })

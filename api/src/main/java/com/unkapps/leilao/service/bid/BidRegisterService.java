@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.time.ZonedDateTime;
 
 @Service
 public class BidRegisterService {
@@ -43,10 +44,14 @@ public class BidRegisterService {
             throw new AppException(AppError.of(Code.AUCTION_FINISHED));
         }
 
+        if (auction.getInitialValue() > dto.getValue()) {
+            throw new AppException(AppError.of(Code.BID_SMALL_VALUE, auction.getInitialValue() + ""));
+        }
+
         bid.setAuction(auction);
         bid.setMadeByUser(authService.getCurrentUser());
         bid.setValue(dto.getValue());
-        bid.setDate(dto.getDate());
+        bid.setDate(ZonedDateTime.now());
 
         return bid;
     }
