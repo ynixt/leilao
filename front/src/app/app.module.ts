@@ -15,12 +15,14 @@ import { LOCALE_ID } from '@angular/core';
 
 import { registerLocaleData } from '@angular/common';
 import localeBr from '@angular/common/locales/pt';
+import { NotFoundComponent } from './pages/errors/not-found/not-found.component';
 
 registerLocaleData(localeBr);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
