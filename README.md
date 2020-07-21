@@ -11,26 +11,6 @@ Um simples projeto MVP, fictício, de leilão, construído em Java com Spring + 
 
 ## Screenshots
 
-Leilões 
-
 ![alt text](https://github.com/ynixt/leilao/blob/master/screenshots/auctions.png?raw=true)
 
-
-Criação de leilão
-
-![alt text](https://github.com/ynixt/leilao/blob/master/screenshots/new%20auction?raw=true)
-
-
-Edição de leilão
-
-![alt text](https://github.com/ynixt/leilao/blob/master/screenshots/edit%20auction?raw=true)
-
-
-Lances
-
-![alt text](https://github.com/ynixt/leilao/blob/master/screenshots/bids?raw=true)
-
-
-Registro
-
-![alt text](https://github.com/ynixt/leilao/blob/master/screenshots/register?raw=true)
+[Ver mais screenshots](screenshots)
