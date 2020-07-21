@@ -18,12 +18,12 @@ Leilões
 
 Criação de leilão
 
-![alt text](https://github.com/ynixt/leilao/blob/master/screenshots/new auction?raw=true)
+![alt text](https://github.com/ynixt/leilao/blob/master/screenshots/new%20auction?raw=true)
 
 
 Edição de leilão
 
-![alt text](https://github.com/ynixt/leilao/blob/master/screenshots/edit auction?raw=true)
+![alt text](https://github.com/ynixt/leilao/blob/master/screenshots/edit%20auction?raw=true)
 
 
 Lances
